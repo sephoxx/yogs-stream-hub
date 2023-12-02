@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./page.module.css";
 import Everything from "./components/Everything/Everything";
 import config from "@/config";
