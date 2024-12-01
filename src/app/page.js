@@ -9,16 +9,15 @@ async function getLiveStreamId() {
     .then((data) => {
       let content = data.contents.twoColumnBrowseResultsRenderer.tabs.find((tab) => tab.tabRenderer.title === "Live");
       content = content.tabRenderer.content.richGridRenderer.contents;
-
       // Find live stream
       let video = content.find(
-        (video) => video.richItemRenderer.content.videoRenderer.thumbnailOverlays[0].thumbnailOverlayTimeStatusRenderer.style === "LIVE"
+        (video) => video.richItemRenderer?.content.videoRenderer.thumbnailOverlays[0].thumbnailOverlayTimeStatusRenderer.style === "LIVE"
       );
 
       // If there's no live stream, find upcoming stream
       if (video === undefined) {
-        video = content.find(
-          (video) => video.richItemRenderer.content.videoRenderer.thumbnailOverlays[0].thumbnailOverlayTimeStatusRenderer.style === "UPCOMING"
+        video = content.findLast(
+          (video) => video.richItemRenderer?.content.videoRenderer.thumbnailOverlays[0].thumbnailOverlayTimeStatusRenderer.style === "UPCOMING"
         );
 
         // If there's no upcoming stream, return null
